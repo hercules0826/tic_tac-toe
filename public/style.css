@@ -1,0 +1,170 @@
+:root {
+  --bg: #f5f6fa;
+  --card: #ffffff;
+  --text: #1d2130;
+  --muted: #6b7185;
+  --border: #dde0ea;
+  --x: #2563eb;
+  --o: #e11d48;
+  --accent: #16a34a;
+  --win: #fef3c7;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #12141c;
+    --card: #1c1f2b;
+    --text: #e8eaf2;
+    --muted: #9aa0b4;
+    --border: #2e3344;
+    --x: #60a5fa;
+    --o: #fb7185;
+    --accent: #4ade80;
+    --win: #3b3412;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+main {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+header { text-align: center; }
+h1 { margin: 0; font-size: 1.6rem; }
+h2 { margin: 0 0 8px; font-size: 1rem; }
+.subtitle, .room { margin: 4px 0; color: var(--muted); font-size: 0.9rem; }
+
+.pill {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  font-size: 0.75rem;
+}
+.pill.online { color: var(--accent); border-color: var(--accent); }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 16px;
+}
+
+label { display: block; font-weight: 600; margin-bottom: 8px; }
+.row { display: flex; gap: 8px; }
+
+input {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 1rem;
+}
+
+button {
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+button:hover { filter: brightness(1.08); }
+
+.scoreboard {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 8px;
+  background: var(--card);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  min-width: 0;
+}
+.player.active { border-color: var(--accent); }
+.player.me .name::after { content: " (you)"; color: var(--muted); font-weight: 400; }
+.player .name {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+}
+.player .score { font-size: 1.8rem; font-weight: 700; }
+
+.mark { font-weight: 800; font-size: 1.2rem; }
+.x { color: var(--x); }
+.o { color: var(--o); }
+
+.meta { text-align: center; font-size: 0.9rem; }
+.draws { color: var(--muted); font-size: 0.8rem; }
+
+.status {
+  text-align: center;
+  font-weight: 600;
+  min-height: 1.5em;
+  margin: 16px 0 8px;
+}
+.status.champion { font-size: 1.2rem; color: var(--accent); }
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  width: min(100%, 320px);
+  margin: 0 auto;
+  aspect-ratio: 1;
+}
+
+.cell {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--card);
+  font-size: clamp(2rem, 12vw, 3.5rem);
+  font-weight: 800;
+  padding: 0;
+  color: var(--text);
+  cursor: default;
+}
+.cell.playable { cursor: pointer; }
+.cell.playable:hover { background: var(--bg); }
+.cell.win { background: var(--win); }
+.cell.x { color: var(--x); }
+.cell.o { color: var(--o); }
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.error { color: var(--o); text-align: center; min-height: 1.2em; margin: 8px 0 0; }
+
+.history { margin: 0; padding-left: 20px; color: var(--muted); }
+.history li { margin: 2px 0; }
+.history:empty::before { content: "No rounds played yet."; margin-left: -20px; }
