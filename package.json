@@ -1,0 +1,17 @@
+{
+  "name": "tic-tac-toe-championship",
+  "version": "1.0.0",
+  "description": "Real-time best-of-five tic-tac-toe championship for two players",
+  "main": "src/server.js",
+  "private": true,
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test test/"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}
